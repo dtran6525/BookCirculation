@@ -16,34 +16,45 @@ public class Worker {
 	}
 	
 	public void checkOut(Patron patron) {
+		eventLog.addEvent(new Date(), this + " is checking out " + patron);
 		Service service = new Service();
 		if (verifyPatron(patron)) {
 			for (Copy c : patron.getCopiesCarry()) {
 				if (scanCopy(c)) {
-					c.setDueDate(service.getDueDate());
+					Date dueDate = service.getDueDate(); 
+					c.setDueDate(dueDate);
+					eventLog.addEvent(dueDate, dueDate + " is assigned to " + c);
 					patron.checkCopyOut(c);
 				}
 			}
 		} 
 	}
 
+	@Override
+	public String toString() {
+		return "Worker [id=" + id + ", name=" + name + "]";
+	}
+
 	public boolean verifyPatron(Patron patron) {
 		Service service = new Service();
 		if (service.lookupPatron(patron.getPatronID()) == null) {
-			eventLog.addEvent(new Date(), "Patron does not exist");
+			eventLog.addEvent(new Date(), patron + " does not exist");
 			return false;
 		} else if ( service.hasHolds(patron.getPatronID())) {
-			eventLog.addEvent(new Date(), "Patron has holds");
+			eventLog.addEvent(new Date(), patron + " has " + service.getHolds(patron.getPatronID()));
 			return false;
 		}
+		eventLog.addEvent(new Date(), this + " successfully verified " + patron);
 		return true;
 	}
+	
 	public boolean scanCopy(Copy copy) {
 		Service service = new Service();
 		if (service.lookupCopy(copy.getCopyID()) == null) {
-			eventLog.addEvent(new Date(), "Copy does not exist in the system");
+			eventLog.addEvent(new Date(), copy + " does not exist in the system");
 			return false;
 		}
+		eventLog.addEvent(new Date(), this + " scans " + copy);
 		return true;
 	}
 	

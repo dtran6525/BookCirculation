@@ -35,10 +35,16 @@ public class FakeDB
 		Copy c1 = new Copy("c1", b1);
 		Copy c2 = new Copy("c2", b2);
 		Copy c3 = new Copy("c3", b3);
+		Copy c4 = new Copy("c4", b1);
+		Copy c5 = new Copy("c5", b2);
+		Copy c6 = new Copy("c6", b3);
 		
 		copyStore.put("c1", c1);
 		copyStore.put("c2", c2);
 		copyStore.put("c3", c3);
+		copyStore.put("c4", c4);
+		copyStore.put("c5", c5);
+		copyStore.put("c6", c6);
 		
 		List<Hold> holds1 = new ArrayList<>();
 		

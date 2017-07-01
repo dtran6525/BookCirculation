@@ -17,7 +17,11 @@ public class Hold {
 		this.copy = copy;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Hold [id=" + id + ", description=" + description + ", date=" + date + "]";
+	}
+
 	public Patron getPatron() {
 		return patron;
 	}

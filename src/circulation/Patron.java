@@ -69,6 +69,7 @@ public class Patron
 	}
 
 	public void grabCopy(Copy c) {
+		eventLog.addEvent(new Date(), "Patron grabs " + c + " from shelf");
 		copiesCarry.add(c);
 	}
 	

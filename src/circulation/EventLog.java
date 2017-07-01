@@ -7,6 +7,8 @@ import java.util.List;
 public class EventLog {
 	public List<TRLEvent> events = new ArrayList<>();
 	public void addEvent(Date date, String description) {
-		this.events.add(new TRLEvent(date, description));
+		TRLEvent e = new TRLEvent(date, description);
+		System.out.println(e);
+		this.events.add(e);
 	}
 }

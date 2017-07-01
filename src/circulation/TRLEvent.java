@@ -5,6 +5,7 @@ import java.util.Date;
 public class TRLEvent {
 	private Date date;
 	private String description;
+	
 	public TRLEvent(Date date, String description) {
 		super();
 		this.date = date;
@@ -21,6 +22,10 @@ public class TRLEvent {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "TRLEvent [date=" + date + ", description=" + description + "]";
 	}
 	
 	
