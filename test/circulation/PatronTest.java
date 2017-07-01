@@ -1,8 +1,15 @@
+package circulation;
+
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
+import circulation.FakeDB;
+import circulation.Patron;
+import circulation.Copy;
+
+
 
 public class PatronTest
 {

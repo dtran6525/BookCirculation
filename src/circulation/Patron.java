@@ -1,3 +1,4 @@
+package circulation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,7 +6,20 @@ public class Patron
 {
 	private String name;
 	private String patronID;
-	private ArrayList<Copy> copiesOut = new ArrayList<>();
+	private List<Copy> copiesOut = new ArrayList<>();
+	private List<Copy> copiesCarry = new ArrayList<>();
+	
+	
+
+	private List<Hold> holds = new ArrayList<>();
+
+	public List<Hold> getHolds() {
+		return holds;
+	}
+
+	public void setHolds(List<Hold> holds) {
+		this.holds = holds;
+	}
 
 	public String getName() {
 		return name;
@@ -23,12 +37,20 @@ public class Patron
 		this.patronID = patronID;
 	}
 
-	public ArrayList<Copy> getCopiesOut() {
+	public List<Copy> getCopiesOut() {
 		return copiesOut;
 	}
 
 	public void setCopiesOut(ArrayList<Copy> copiesOut) {
 		this.copiesOut = copiesOut;
+	}
+	
+	public List<Copy> getCopiesCarry() {
+		return copiesCarry;
+	}
+
+	public void setCopiesCarry(List<Copy> copiesCarry) {
+		this.copiesCarry = copiesCarry;
 	}
 
 	public Patron(String id, String name)

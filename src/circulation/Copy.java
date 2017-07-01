@@ -1,9 +1,11 @@
+package circulation;
 import java.util.Date;
 
 public class Copy
 {
 	private String copyID;
-	private String title;
+	private Textbook textbook;
+	
 	private Patron outTo;
 	private Date dueDate;
 	
@@ -19,12 +21,7 @@ public class Copy
 	public void setCopyID(String copyID) {
 		this.copyID = copyID;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
+
 	public Patron getOutTo() {
 		return outTo;
 	}
@@ -32,15 +29,23 @@ public class Copy
 		this.outTo = outTo;
 	}
 
-	public Copy(String copyID, String title)
+	public Copy(String copyID, Textbook textbook)
 	{
 		this.copyID = copyID;
-		this.title = title;
+		this.textbook = textbook;
 	}
+	
+	public Textbook getTextbook() {
+		return textbook;
+	}
+	public void setTextbook(Textbook textbook) {
+		this.textbook = textbook;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Copy [copyID=" + copyID + ", title=" + title + "]";
+		return "Copy [copyID=" + copyID + ", textbook=" + textbook + "]";
 	}
 	
 	@Override
@@ -69,12 +74,6 @@ public class Copy
 	
 	public static void main(String[] args)
 	{
-		Copy c1 = new Copy("C1", "Fun with Objects");
-		Patron p1 = new Patron("Eric", "P47");
-
-		System.out.println(c1);
-		System.out.println(p1);
-		
-		Copy c2 = FakeDB.getCopy("C2");
+	
 	}
 }
