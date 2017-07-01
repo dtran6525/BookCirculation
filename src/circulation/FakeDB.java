@@ -16,16 +16,17 @@ public class FakeDB
 	
 	static // the following runs once when class is loaded: "static initializer"
 	{
-		Patron p1 = new Patron("p1", "John");
-		Patron p2 = new Patron("p2", "James");
-		Patron p3 = new Patron("p3", "Jill");
+		EventLog log = new EventLog();
+		Patron p1 = new Patron("p1", "John", log);
+		Patron p2 = new Patron("p2", "James", log);
+		Patron p3 = new Patron("p3", "Jill", log);
 		
 		patronStore.put("p1", p1);
 		patronStore.put("p2", p2);
 		patronStore.put("p3", p3);
 		
-		workerStore.put("w1", new Worker("w1", "Derek"));
-		workerStore.put("w2", new Worker("w2", "Jake"));
+		workerStore.put("w1", new Worker("w1", "Derek", log));
+		workerStore.put("w2", new Worker("w2", "Jake", log));
 		
 		Textbook b1 = new Textbook("b1", "Programming in Java");
 		Textbook b2 = new Textbook("b2", "Programming in Python");

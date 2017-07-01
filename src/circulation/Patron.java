@@ -1,5 +1,6 @@
 package circulation;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Patron
@@ -8,8 +9,7 @@ public class Patron
 	private String patronID;
 	private List<Copy> copiesOut = new ArrayList<>();
 	private List<Copy> copiesCarry = new ArrayList<>();
-	
-	
+	private EventLog eventLog;
 
 	private List<Hold> holds = new ArrayList<>();
 
@@ -37,6 +37,14 @@ public class Patron
 		this.patronID = patronID;
 	}
 
+	public EventLog getEventLog() {
+		return eventLog;
+	}
+
+	public void setEventLog(EventLog eventLog) {
+		this.eventLog = eventLog;
+	}
+
 	public List<Copy> getCopiesOut() {
 		return copiesOut;
 	}
@@ -53,10 +61,11 @@ public class Patron
 		this.copiesCarry = copiesCarry;
 	}
 
-	public Patron(String id, String name)
+	public Patron(String id, String name, EventLog log)
 	{
 		this.patronID = id;
 		this.name = name;
+		this.eventLog = log;
 	}
 
 	public boolean checkCopyOut(Copy c)
@@ -64,6 +73,8 @@ public class Patron
 		if (copiesOut.contains(c)) return false;
 		copiesOut.add(c);
 		c.setOutTo(this);
+		eventLog.addEvent(new Date(), "Patron is leaving with copy");
+		
 		return true;
 	}
 
@@ -72,6 +83,7 @@ public class Patron
 		if (!copiesOut.contains(c)) return true;
 		copiesOut.remove(c);
 		c.setOutTo(null);
+		eventLog.addEvent(new Date(), "Patron is returning copy");
 		return true;
 	}
 

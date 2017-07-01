@@ -1,5 +1,6 @@
 package circulation;
 
+import java.util.Date;
 import java.util.List;
 
 public class Worker {
@@ -8,30 +9,43 @@ public class Worker {
 	private EventLog eventLog;
 	
 	
-	public Worker(String id, String name) {
+	public Worker(String id, String name, EventLog log) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.eventLog = log;
 	}
 	
 	public void checkOut(Patron patron, List<Copy> copies) {
 		Service service = new Service();
-		for (Copy c : copies) {
-			if (scanCopy(c)) {
-				c.setDueDate(service.getDueDate());
-				patron.checkCopyOut(c);
+		if (verifyPatron(patron)) {
+			for (Copy c : copies) {
+				if (scanCopy(c)) {
+					c.setDueDate(service.getDueDate());
+					patron.checkCopyOut(c);
+				}
 			}
-		}
+		} 
 	}
 
 	public boolean verifyPatron(Patron patron) {
 		Service service = new Service();
-		return service.lookupPatron(patron.getPatronID())!= null && 
-			   service.hasHolds(patron.getPatronID());
+		if (service.lookupPatron(patron.getPatronID()) == null) {
+			eventLog.addEvent(new Date(), "Patron does not exist");
+			return false;
+		} else if ( service.hasHolds(patron.getPatronID())) {
+			eventLog.addEvent(new Date(), "Patron has holds");
+			return false;
+		}
+		return true;
 	}
 	public boolean scanCopy(Copy copy) {
 		Service service = new Service();
-		return service.lookupCopy(copy.getCopyID()) != null;
+		if (service.lookupCopy(copy.getCopyID()) == null) {
+			eventLog.addEvent(new Date(), "Copy does not exist in the system");
+			return false;
+		}
+		return true;
 	}
 	
 	public String getId() {
