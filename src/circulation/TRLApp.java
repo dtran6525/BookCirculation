@@ -21,7 +21,19 @@ public class TRLApp {
 		Patron p1 = FakeDB.getPatron("p1");
 		Patron p2 = FakeDB.getPatron("p2");
 		Patron p3 = FakeDB.getPatron("p3");
+		
+		p1.grabCopy(shelf.takeCopy("c1"));
+		p1.grabCopy(shelf.takeCopy("c2"));
+		p2.grabCopy(shelf.takeCopy("c3"));
+		p2.grabCopy(shelf.takeCopy("c4"));
+		p2.grabCopy(shelf.takeCopy("c5"));
+		p3.grabCopy(shelf.takeCopy("c6"));
+		
 		Worker w1 = FakeDB.getWorker("w1");
 		Worker w2 = FakeDB.getWorker("w2");
+		
+		w1.checkOut(p1);
+		w1.checkOut(p2);
+		w2.checkOut(p3);
 	}
 }
