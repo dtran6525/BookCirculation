@@ -19,11 +19,12 @@ public class Worker {
 		eventLog.addEvent(new Date(), this + " is checking out " + patron);
 		Service service = new Service();
 		if (verifyPatron(patron)) {
-			for (Copy c : patron.getCopiesCarry()) {
+			for (int i = patron.getCopiesCarry().size() - 1 ; i >= 0 ; i-- ) {
+				Copy c = patron.getCopiesCarry().get(i);
 				if (scanCopy(c)) {
 					Date dueDate = service.getDueDate(); 
 					c.setDueDate(dueDate);
-					eventLog.addEvent(dueDate, dueDate + " is assigned to " + c);
+					eventLog.addEvent(new Date(), dueDate + " is assigned to " + c);
 					patron.checkCopyOut(c);
 				}
 			}

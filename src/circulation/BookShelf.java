@@ -8,7 +8,7 @@ public class BookShelf {
 	public void putCopy(Copy c) {
 		this.availableCopies.put(c.getCopyID(), c);
 	}
-	public Copy takeCopy(String copyID) {
+	public Copy passCopy(String copyID) {
 		return this.availableCopies.remove(copyID);
 	}
 }
