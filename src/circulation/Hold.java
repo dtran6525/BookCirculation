@@ -8,7 +8,6 @@ public class Hold {
 	private Patron patron;
 	private Copy copy;
 	
-	
 	public Hold(String id, String description, Date date, Patron patron, Copy copy) {
 		super();
 		this.id = id;

@@ -68,10 +68,15 @@ public class Patron
 		this.eventLog = log;
 	}
 
+	public void grabCopy(Copy c) {
+		copiesCarry.add(c);
+	}
+	
 	public boolean checkCopyOut(Copy c)
 	{
 		if (copiesOut.contains(c)) return false;
 		copiesOut.add(c);
+		copiesCarry.remove(c);
 		c.setOutTo(this);
 		eventLog.addEvent(new Date(), "Patron is leaving with copy");
 		

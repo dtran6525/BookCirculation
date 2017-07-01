@@ -1,7 +1,6 @@
 package circulation;
 
 import java.util.Date;
-import java.util.List;
 
 public class Worker {
 	private String id;
@@ -16,10 +15,10 @@ public class Worker {
 		this.eventLog = log;
 	}
 	
-	public void checkOut(Patron patron, List<Copy> copies) {
+	public void checkOut(Patron patron) {
 		Service service = new Service();
 		if (verifyPatron(patron)) {
-			for (Copy c : copies) {
+			for (Copy c : patron.getCopiesCarry()) {
 				if (scanCopy(c)) {
 					c.setDueDate(service.getDueDate());
 					patron.checkCopyOut(c);

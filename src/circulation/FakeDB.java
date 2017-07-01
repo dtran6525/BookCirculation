@@ -64,6 +64,10 @@ public class FakeDB
 		return patronStore.get(patronID);
 	}
 	
+	public static Worker getWorker(String workerID) {
+		return workerStore.get(workerID);
+	}
+	
 	public static Copy getCopy(String copyID)
 	{
 		return copyStore.get(copyID);
