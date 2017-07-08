@@ -2,6 +2,7 @@ package circulation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,14 @@ public class FakeDB
 	public static Patron getPatron(String patronID)
 	{
 		return patronStore.get(patronID);
+	}
+	
+	public static List<Patron> getPatrons() {
+		return new ArrayList<>(patronStore.values());
+	}
+	
+	public static List<Copy> getCopies() {
+		return new ArrayList<>(copyStore.values());
 	}
 	
 	public static Worker getWorker(String workerID) {

@@ -1,26 +1,32 @@
 package circulation;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Scanner;
+
 public class TRLApp {
-	public static void main(String argsp[]) {
+	public static void main(String args[]) {
+		
 		BookShelf shelf = new BookShelf();
 		
-		Copy c1 = FakeDB.getCopy("c1");
-		Copy c2 = FakeDB.getCopy("c2");
-		Copy c3 = FakeDB.getCopy("c3");
-		Copy c4 = FakeDB.getCopy("c4");
-		Copy c5 = FakeDB.getCopy("c5");
-		Copy c6 = FakeDB.getCopy("c6");
+		shelf.putCopies(FakeDB.getCopies());
+	
+		Scanner sc = new Scanner(System.in);
 		
-		shelf.putCopy(c1);
-		shelf.putCopy(c2);
-		shelf.putCopy(c3);
-		shelf.putCopy(c4);
-		shelf.putCopy(c5);
-		shelf.putCopy(c6);
 		
-		Patron p1 = FakeDB.getPatron("p1");
-		Patron p2 = FakeDB.getPatron("p2");
-		Patron p3 = FakeDB.getPatron("p3");
+		
+		List<Patron> patrons = FakeDB.getPatrons();
+		for (int i = 0 ; i < patrons.size() ; i++) {
+			System.out.println( i+1 + ". " + patrons.get(i));
+		}
+				
+		System.out.println("Pick a patron (Enter a number from 1 - " + patrons.size() + "):");
+		
+		
+		System.out.println("Welcome");
+		
+		
 		
 		p1.grabCopy(shelf.passCopy("c1"));
 		p1.grabCopy(shelf.passCopy("c2"));
