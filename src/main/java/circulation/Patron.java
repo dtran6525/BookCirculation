@@ -79,9 +79,12 @@ public class Patron
 		copiesOut.add(c);
 		copiesCarry.remove(c);
 		c.setOutTo(this);
-		eventLog.addEvent(new Date(), "Patron is leaving with copy");
+		
 		
 		return true;
+	}
+	public void leave() {
+		eventLog.addEvent(new Date(), this + " has left the library");
 	}
 
 	public boolean checkCopyIn(Copy c)

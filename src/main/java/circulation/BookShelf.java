@@ -1,5 +1,6 @@
 package main.java.circulation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,4 +20,11 @@ public class BookShelf {
 			this.availableCopies.put(c.getCopyID(), c);
 		}
 	}
+	public List<Copy> getCopies() {
+		return new ArrayList<>(availableCopies.values());
+	}
+	public Map<String, Copy> getAvailableCopies() {
+		return availableCopies;
+	}
+	
 }
