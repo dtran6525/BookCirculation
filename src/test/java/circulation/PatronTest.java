@@ -1,13 +1,17 @@
-package circulation;
+package test.java.circulation;
 
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import circulation.FakeDB;
-import circulation.Patron;
-import circulation.Copy;
+import main.java.circulation.BookShelf;
+import main.java.circulation.Copy;
+import main.java.circulation.FakeDB;
+import main.java.circulation.Patron;
+import main.java.circulation.Worker;
+
+
 
 public class PatronTest
 {

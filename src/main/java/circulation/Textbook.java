@@ -1,4 +1,4 @@
-package circulation;
+package main.java.circulation;
 
 public class Textbook {
 	private String id;
