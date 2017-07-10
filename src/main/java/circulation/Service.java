@@ -2,6 +2,7 @@ package  main.java.circulation;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class Service {
 	}
 	
 	public List<Hold> getHolds(String patronID){
-		return FakeDB.getHolds(patronID);
+		return FakeDB.getHolds(patronID) == null ? new ArrayList<>() : FakeDB.getHolds(patronID) ;
 	}
 	
 	public Patron lookupPatron(String patronID) {

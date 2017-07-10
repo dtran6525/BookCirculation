@@ -79,8 +79,6 @@ public class Patron
 		copiesOut.add(c);
 		copiesCarry.remove(c);
 		c.setOutTo(this);
-		
-		
 		return true;
 	}
 	public void leave() {
@@ -89,7 +87,7 @@ public class Patron
 
 	public boolean checkCopyIn(Copy c)
 	{
-		if (!copiesOut.contains(c)) return true;
+		if (!copiesOut.contains(c)) return false;
 		copiesOut.remove(c);
 		c.setOutTo(null);
 		eventLog.addEvent(new Date(), "Patron is returning copy");
@@ -123,7 +121,7 @@ public class Patron
 
 	@Override
 	public String toString() {
-		return "Patron [name=" + name + ", patronID=" + patronID + ", copiesOut=" + copiesOut + "]";
+		return "Patron [name=" + name + ", patronID=" + patronID + "]";
 	}
 
 	public static void main(String[] args)

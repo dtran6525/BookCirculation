@@ -1,6 +1,8 @@
 package main.java.circulation;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Worker {
 	private String id;
@@ -29,6 +31,35 @@ public class Worker {
 				}
 			}
 		} 
+	}
+	
+	public void checkOut(Patron patron, Copy copy) {
+		eventLog.addEvent(new Date(), this + " is checking out " + patron);
+		Service service = new Service();
+		Date dueDate = service.getDueDate(); 
+		copy.setDueDate(dueDate);
+		eventLog.addEvent(new Date(), dueDate + " is assigned to " + copy);
+		patron.checkCopyOut(copy);
+	}
+	
+	
+	public List<Copy> checkIn(Patron patron) {
+		List<Copy> checkInCopies = new ArrayList<>();
+		eventLog.addEvent(new Date(), this + " is checking in " + patron);
+		if (verifyPatron(patron)) {
+			for (int i = patron.getCopiesOut().size() - 1 ; i >= 0 ; i-- ) {
+				Copy c = patron.getCopiesOut().get(i);
+				if (scanCopy(c)) {
+					patron.checkCopyIn(c);
+					checkInCopies.add(c);
+				}
+			}
+		} 
+		return checkInCopies;
+	}
+	public void checkIn(Patron patron, Copy copy) {
+		eventLog.addEvent(new Date(), this + " is checking in " + patron);
+		patron.checkCopyIn(copy);
 	}
 
 	@Override

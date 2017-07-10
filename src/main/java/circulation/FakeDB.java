@@ -25,8 +25,8 @@ public class FakeDB
 		patronStore.put("p2", p2);
 		patronStore.put("p3", p3);
 		
-		workerStore.put("w1", new Worker("w1", "Derek", log));
-		workerStore.put("w2", new Worker("w2", "Jake", log));
+		workerStore.put("w1", new Worker("w1", "Peter", log));
+		workerStore.put("w2", new Worker("w2", "James", log));
 		
 		Textbook b1 = new Textbook("b1", "Programming in Java");
 		Textbook b2 = new Textbook("b2", "Programming in Python");
