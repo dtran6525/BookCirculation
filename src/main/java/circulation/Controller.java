@@ -18,10 +18,11 @@ public class Controller {
 		
 	}
 	
-	public void assignCopyToPatron(int input, BookShelf shelf, Patron patron) {
+	public Copy assignCopyToPatron(int input, BookShelf shelf, Patron patron) {
 		Copy c = shelf.getCopies().get(input - 1);
 		patron.grabCopy(c);
 		shelf.getAvailableCopies().remove(c.getCopyID());
+		return c;
 	}
 	public boolean getPatronCheckOutPrompt(String input) {
 		return input.equalsIgnoreCase("y");
@@ -47,8 +48,8 @@ public class Controller {
 	public void identifyPatron(Worker activeWorker, Patron activePatron, boolean result) {
 		activeWorker.identifyPatron(activePatron, result);
 	}
-	public void addHold(Worker activeWorker, Patron activePatron, String holdDesc, String copyId) {
-		activeWorker.addHold(activePatron, holdDesc, copyId);
+	public Hold addHold(Worker activeWorker, Patron activePatron, String holdDesc, String copyId) {
+		return activeWorker.addHold(activePatron, holdDesc, copyId);
 		
 	}
 	public void removeHold(Worker activeWorker, Patron activePatron, String holdId) {

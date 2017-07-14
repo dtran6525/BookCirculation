@@ -119,10 +119,11 @@ public class Worker {
 		eventLog.addEvent(new Date(), this + s + activePatron);
 	}
 
-	public void addHold(Patron activePatron, String holdDesc, String copyId) {
+	public Hold addHold(Patron activePatron, String holdDesc, String copyId) {
 		Service service = new Service();
 		Hold h = service.addHold(activePatron, holdDesc, copyId);
 		eventLog.addEvent(new Date(), this + " added " + h + " to " + activePatron);
+		return h;
 		
 	}
 

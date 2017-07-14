@@ -11,10 +11,6 @@ public class BookShelf {
 	public void putCopy(Copy c) {
 		this.availableCopies.put(c.getCopyID(), c);
 	}
-	public Copy passCopy(String copyID) {
-		return this.availableCopies.remove(copyID);
-	}
-	
 	public void putCopies(List<Copy> copies){
 		for (Copy c : copies) {
 			this.availableCopies.put(c.getCopyID(), c);
