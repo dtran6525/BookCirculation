@@ -102,13 +102,12 @@ public class TRLApp {
 					Worker activeWorker = controller.pickWorker(app.getScanner().nextInt());
 					System.out.println(activeWorker + " is checking in " + activePatron);
 					app.setActiveWorker(activeWorker);
-					
-					String workerCommand = app.getScanner().next();
 					boolean workerDone = true;
 					while (workerDone) {
 						System.out.println("You are now controlling "+ activeWorker);
 						System.out.println("Available commands: id, copies, holds, done");
 						System.out.print("What do you want to do:");
+						String workerCommand = app.getScanner().next();
 						if (workerCommand.equalsIgnoreCase("id")) {
 							app.identifyPatron();
 						} else if (workerCommand.equalsIgnoreCase("copies")) {
