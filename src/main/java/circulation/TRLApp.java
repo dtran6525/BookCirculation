@@ -90,6 +90,23 @@ public class TRLApp {
 								else System.out.println("Unable to verify " + activeCopy);
 							}
 						} else if (workerCommand.equalsIgnoreCase("holds")) {
+							boolean holdDone = true;
+							while (holdDone) {
+								System.out.println("Holds Management");
+								System.out.println("Available commands: browse, add, remove, done");
+								System.out.print("What do you want to do:");
+								String holdCommand = app.getScanner().next();
+								if (holdCommand.equals("browse")) {
+									
+								} else if (holdCommand.equals("add")) {
+									
+								} else if (holdCommand.equals("remove")) {
+									
+								} else if (holdCommand.equals("done")) {
+									holdDone = false;
+								}
+							}
+							
 							
 						} else if (workerCommand.equalsIgnoreCase("done")) {
 							System.out.println("Thank you and have a nice day!");
