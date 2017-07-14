@@ -122,8 +122,14 @@ public class Worker {
 	public void addHold(Patron activePatron, String holdDesc, String copyId) {
 		Service service = new Service();
 		Hold h = service.addHold(activePatron, holdDesc, copyId);
-		eventLog.addEvent(new Date(), this + "added " + h + " to " + activePatron);
+		eventLog.addEvent(new Date(), this + " added " + h + " to " + activePatron);
 		
+	}
+
+	public void removeHold(Patron activePatron, String holdId) {
+		Service service = new Service();
+		Hold h = service.removeHold(activePatron, holdId);
+		eventLog.addEvent(new Date(), this + " removed " + h + " from " + activePatron);
 	}
 
 

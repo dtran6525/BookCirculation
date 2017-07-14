@@ -51,5 +51,9 @@ public class Controller {
 		activeWorker.addHold(activePatron, holdDesc, copyId);
 		
 	}
+	public void removeHold(Worker activeWorker, Patron activePatron, String holdId) {
+		activeWorker.removeHold(activePatron, holdId);
+		
+	}
 	
 }

@@ -60,7 +60,7 @@ public class TRLApp {
 			
 			boolean leave = false;
 			while (!leave) {
-				System.out.println("You are now controlling "+ activePatron);
+				System.out.println("======> You are now controlling "+ activePatron);
 				System.out.println("Available commands: status, shelf, checkout, checkin, leave");
 				System.out.print("What do you want to do:");
 				String command = app.getScanner().next();
@@ -75,7 +75,7 @@ public class TRLApp {
 					app.setActiveWorker(activeWorker);
 					boolean workerDone = true;
 					while (workerDone) {
-						System.out.println("You are now controlling "+ activeWorker);
+						System.out.println("======> You are now controlling "+ activeWorker);
 						System.out.println("Available commands: id, copies, holds, done");
 						System.out.print("What do you want to do:");
 						String workerCommand = app.getScanner().next();
@@ -92,16 +92,16 @@ public class TRLApp {
 						} else if (workerCommand.equalsIgnoreCase("holds")) {
 							boolean holdDone = true;
 							while (holdDone) {
-								System.out.println("Holds Management");
+								System.out.println("======> Holds Management");
 								System.out.println("Available commands: browse, add, remove, done");
 								System.out.print("What do you want to do:");
 								String holdCommand = app.getScanner().next();
 								if (holdCommand.equals("browse")) {
-									
+									app.browseHolds();
 								} else if (holdCommand.equals("add")) {
 									app.addHold();
 								} else if (holdCommand.equals("remove")) {
-									
+									app.removeHold();
 								} else if (holdCommand.equals("done")) {
 									holdDone = false;
 								}
@@ -121,7 +121,7 @@ public class TRLApp {
 					app.setActiveWorker(activeWorker);
 					boolean workerDone = true;
 					while (workerDone) {
-						System.out.println("You are now controlling "+ activeWorker);
+						System.out.println("======> You are now controlling "+ activeWorker);
 						System.out.println("Available commands: id, copies, holds, done");
 						System.out.print("What do you want to do:");
 						String workerCommand = app.getScanner().next();
@@ -143,6 +143,22 @@ public class TRLApp {
 							shelf.putCopies(checkedInCopies);
 							
 						} else if (workerCommand.equalsIgnoreCase("holds")) {
+							boolean holdDone = true;
+							while (holdDone) {
+								System.out.println("======> Holds Management");
+								System.out.println("Available commands: browse, add, remove, done");
+								System.out.print("What do you want to do:");
+								String holdCommand = app.getScanner().next();
+								if (holdCommand.equals("browse")) {
+									app.browseHolds();
+								} else if (holdCommand.equals("add")) {
+									app.addHold();
+								} else if (holdCommand.equals("remove")) {
+									app.removeHold();
+								} else if (holdCommand.equals("done")) {
+									holdDone = false;
+								}
+							}
 							
 						} else if (workerCommand.equalsIgnoreCase("done")) {
 							System.out.println("Thank you and have a nice day!");
@@ -157,6 +173,19 @@ public class TRLApp {
 			}
 		}
 		
+	}
+
+	private void browseHolds() {
+		Service service = new Service();
+		List<Hold> holds = service.getHolds(activePatron.getPatronID());
+		for (Hold h : holds) {
+			System.out.println(h);
+		}
+	}
+
+	private void removeHold() {
+		System.out.println("Enter hold id:");
+		controller.removeHold(activeWorker, activePatron, scanner.next());
 	}
 
 	private void addHold() {

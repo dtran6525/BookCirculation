@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Service {
@@ -39,6 +40,17 @@ public class Service {
 			FakeDB.getHolds(activePatron.getPatronID()).add(h);
 		}
 		return h;
+	}
+
+	public Hold removeHold(Patron activePatron, String holdId) {
+		Optional<Hold> holdOpt = FakeDB.getHolds(activePatron.getPatronID())
+										.stream()
+										.filter(p -> p.getId().equals(holdId)).findFirst();
+		if (holdOpt.isPresent()) {
+			FakeDB.getHolds(activePatron.getPatronID()).remove(holdOpt.get());
+			return holdOpt.get();
+		}
+		return null;
 	}
 	
 	
