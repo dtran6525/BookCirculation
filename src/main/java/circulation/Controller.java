@@ -47,5 +47,9 @@ public class Controller {
 	public void identifyPatron(Worker activeWorker, Patron activePatron, boolean result) {
 		activeWorker.identifyPatron(activePatron, result);
 	}
+	public void addHold(Worker activeWorker, Patron activePatron, String holdDesc, String copyId) {
+		activeWorker.addHold(activePatron, holdDesc, copyId);
+		
+	}
 	
 }

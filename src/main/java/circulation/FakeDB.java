@@ -11,6 +11,10 @@ public class FakeDB
 {
 	private static Map<String,Patron> patronStore = new HashMap<>();
 	private static Map<String, Worker> workerStore = new HashMap<>();
+	public static Map<String, Patron> getPatronStore() {
+		return patronStore;
+	}
+
 	private static Map<String,Copy> copyStore = new HashMap<>();
 	private static Map<String, List<Hold>> holdsLookup = new HashMap<>();
 	
@@ -94,5 +98,31 @@ public class FakeDB
 	public static List<Hold> getHolds(String patronId){
 		return holdsLookup.get(patronId);
 	}
-	
+	public static void setPatronStore(Map<String, Patron> patronStore) {
+		FakeDB.patronStore = patronStore;
+	}
+
+	public static Map<String, Worker> getWorkerStore() {
+		return workerStore;
+	}
+
+	public static void setWorkerStore(Map<String, Worker> workerStore) {
+		FakeDB.workerStore = workerStore;
+	}
+
+	public static Map<String, Copy> getCopyStore() {
+		return copyStore;
+	}
+
+	public static void setCopyStore(Map<String, Copy> copyStore) {
+		FakeDB.copyStore = copyStore;
+	}
+
+	public static Map<String, List<Hold>> getHoldsLookup() {
+		return holdsLookup;
+	}
+
+	public static void setHoldsLookup(Map<String, List<Hold>> holdsLookup) {
+		FakeDB.holdsLookup = holdsLookup;
+	}
 }

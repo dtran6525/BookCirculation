@@ -99,7 +99,7 @@ public class TRLApp {
 								if (holdCommand.equals("browse")) {
 									
 								} else if (holdCommand.equals("add")) {
-									
+									app.addHold();
 								} else if (holdCommand.equals("remove")) {
 									
 								} else if (holdCommand.equals("done")) {
@@ -157,6 +157,15 @@ public class TRLApp {
 			}
 		}
 		
+	}
+
+	private void addHold() {
+		System.out.print("Enter description:");
+		String holdDesc = scanner.next();
+		holdDesc += scanner.nextLine();
+		System.out.print("Enter copy id(optional) :");
+		String copyId = scanner.next();
+		controller.addHold(activeWorker, activePatron, holdDesc, copyId);
 	}
 
 	public void pickPatron() {

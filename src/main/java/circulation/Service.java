@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Service {
 	public boolean hasHolds(String patronID){
@@ -25,6 +26,19 @@ public class Service {
 	
 	public Date getDueDate() {
 		return Date.from(LocalDate.now().plusMonths(3).atStartOfDay(ZoneId.systemDefault()).toInstant());
+	}
+
+	public Hold addHold(Patron activePatron, String holdDesc, String copyId) {
+		Copy c = lookupCopy(copyId);
+		Hold h = new Hold(UUID.randomUUID().toString(), holdDesc, new Date(), activePatron, c);
+		if (FakeDB.getHolds(activePatron.getPatronID()) == null) {
+			List<Hold> holds = new ArrayList<>();
+			holds.add(h);
+			FakeDB.getHoldsLookup().put(activePatron.getPatronID(), holds);
+		} else {
+			FakeDB.getHolds(activePatron.getPatronID()).add(h);
+		}
+		return h;
 	}
 	
 	
