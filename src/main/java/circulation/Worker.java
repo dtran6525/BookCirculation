@@ -114,6 +114,11 @@ public class Worker {
 		this.eventLog = eventLog;
 	}
 
+	public void identifyPatron(Patron activePatron, boolean result) {
+		String s = result ? " has successfully identified " : " has failed to identify ";
+		eventLog.addEvent(new Date(), this + s + activePatron);
+	}
+
 
 
 }

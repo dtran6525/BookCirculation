@@ -60,6 +60,7 @@ public class TRLApp {
 			
 			boolean leave = false;
 			while (!leave) {
+				System.out.println("You are now controlling "+ activePatron);
 				System.out.println("Available commands: status, shelf, checkout, checkin, leave");
 				System.out.print("What do you want to do:");
 				String command = app.getScanner().next();
@@ -71,34 +72,68 @@ public class TRLApp {
 				} else if (command.equalsIgnoreCase("checkout")) {
 					app.pickWorker();
 					Worker activeWorker = controller.pickWorker(app.getScanner().nextInt());
-					if (app.identifyPatron()) {
-						List<Copy> copiesCarry = activePatron.getCopiesCarry();
-						for (int i = copiesCarry.size() - 1; i >= 0; i--) {
-							Copy activeCopy = copiesCarry.get(i);
-							app.displayCopy(activeCopy);
-							if (app.verifyCopy()) controller.checkOutCopy(activeWorker, activePatron, activeCopy);
-							else System.out.println("Unable to verify " + activeCopy);
+					app.setActiveWorker(activeWorker);
+					boolean workerDone = true;
+					while (workerDone) {
+						System.out.println("You are now controlling "+ activeWorker);
+						System.out.println("Available commands: id, copies, holds, done");
+						System.out.print("What do you want to do:");
+						String workerCommand = app.getScanner().next();
+						if (workerCommand.equalsIgnoreCase("id")) {
+							app.identifyPatron();
+						} else if (workerCommand.equalsIgnoreCase("copies")) {
+							List<Copy> copiesCarry = activePatron.getCopiesCarry();
+							for (int i = copiesCarry.size() - 1; i >= 0; i--) {
+								Copy activeCopy = copiesCarry.get(i);
+								app.displayCopy(activeCopy);
+								if (app.verifyCopy()) controller.checkOutCopy(activeWorker, activePatron, activeCopy);
+								else System.out.println("Unable to verify " + activeCopy);
+							}
+						} else if (workerCommand.equalsIgnoreCase("holds")) {
+							
+						} else if (workerCommand.equalsIgnoreCase("done")) {
+							System.out.println("Thank you and have a nice day!");
+							workerDone = false;
 						}
 					}
+					
 				} else if (command.equalsIgnoreCase("checkin")) {
 					app.pickWorker();
 					Worker activeWorker = controller.pickWorker(app.getScanner().nextInt());
 					System.out.println(activeWorker + " is checking in " + activePatron);
-					List<Copy> checkedInCopies = new ArrayList<>();
-					if (app.identifyPatron()) {
-						List<Copy> copiesOut = activePatron.getCopiesOut();
-						for (int i = copiesOut.size() - 1; i >= 0; i--) {
-							Copy activeCopy = copiesOut.get(i);
-							app.displayCopy(activeCopy);
-							if (app.verifyCopy()) {
-								controller.checkInCopy(activeWorker, activePatron, activeCopy);
-								checkedInCopies.add(activeCopy);
-							} else {
-								System.out.println("Unable to verify " + activeCopy);
+					app.setActiveWorker(activeWorker);
+					
+					String workerCommand = app.getScanner().next();
+					boolean workerDone = true;
+					while (workerDone) {
+						System.out.println("You are now controlling "+ activeWorker);
+						System.out.println("Available commands: id, copies, holds, done");
+						System.out.print("What do you want to do:");
+						if (workerCommand.equalsIgnoreCase("id")) {
+							app.identifyPatron();
+						} else if (workerCommand.equalsIgnoreCase("copies")) {
+							List<Copy> checkedInCopies = new ArrayList<>();
+							List<Copy> copiesOut = activePatron.getCopiesOut();
+							for (int i = copiesOut.size() - 1; i >= 0; i--) {
+								Copy activeCopy = copiesOut.get(i);
+								app.displayCopy(activeCopy);
+								if (app.verifyCopy()) {
+									controller.checkInCopy(activeWorker, activePatron, activeCopy);
+									checkedInCopies.add(activeCopy);
+								} else {
+									System.out.println("Unable to verify " + activeCopy);
+								}
 							}
+							shelf.putCopies(checkedInCopies);
+							
+						} else if (workerCommand.equalsIgnoreCase("holds")) {
+							
+						} else if (workerCommand.equalsIgnoreCase("done")) {
+							System.out.println("Thank you and have a nice day!");
+							workerDone = false;
 						}
 					}
-					shelf.putCopies(checkedInCopies);
+					
 				} else if (command.equalsIgnoreCase("leave")) {
 					activePatron.leave();
 					leave = true;
@@ -154,12 +189,12 @@ public class TRLApp {
 		System.out.print("Pick a checkout station (Enter a number from 1 - " + workers.size() + "):");
 	}
 
-	public boolean identifyPatron() {
+	public void identifyPatron() {
 		Service service = new Service();
 		System.out.print("Enter patron id:");
 		Patron verify = service.lookupPatron(scanner.next());
 		System.out.print("Please verify that current patron is " + verify + "(y/n)");
-		return scanner.next().equalsIgnoreCase("y");
+		controller.identifyPatron(activeWorker, activePatron, scanner.next().equalsIgnoreCase("y"));
 	}
 
 	public void displayCopy(Copy c) {

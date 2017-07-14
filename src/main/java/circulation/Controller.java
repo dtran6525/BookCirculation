@@ -44,5 +44,8 @@ public class Controller {
 	public List<Copy> checkInPatron(Worker activeWorker, Patron activePatron) {
 		return activeWorker.checkIn(activePatron);
 	}
+	public void identifyPatron(Worker activeWorker, Patron activePatron, boolean result) {
+		activeWorker.identifyPatron(activePatron, result);
+	}
 	
 }
