@@ -75,7 +75,8 @@ public class TRLApp {
 					app.setActiveWorker(activeWorker);
 					boolean workerDone = true;
 					while (workerDone) {
-						System.out.println("======> You are now controlling "+ activeWorker);
+						System.out.println("======> You are now controlling "+ activeWorker );
+						System.out.println("======> You are now checking out "+ activePatron );
 						System.out.println("Available commands: id, copies, holds, done");
 						System.out.print("What do you want to do:");
 						String workerCommand = app.getScanner().next();
@@ -107,7 +108,6 @@ public class TRLApp {
 								}
 							}
 							
-							
 						} else if (workerCommand.equalsIgnoreCase("done")) {
 							System.out.println("Thank you and have a nice day!");
 							workerDone = false;
@@ -122,6 +122,7 @@ public class TRLApp {
 					boolean workerDone = true;
 					while (workerDone) {
 						System.out.println("======> You are now controlling "+ activeWorker);
+						System.out.println("======> You are now checking in "+ activePatron );
 						System.out.println("Available commands: id, copies, holds, done");
 						System.out.print("What do you want to do:");
 						String workerCommand = app.getScanner().next();
@@ -248,7 +249,14 @@ public class TRLApp {
 		System.out.print("Enter patron id:");
 		Patron verify = service.lookupPatron(scanner.next());
 		System.out.print("Please verify that current patron is " + verify + "(y/n)");
-		controller.identifyPatron(activeWorker, activePatron, scanner.next().equalsIgnoreCase("y"));
+		boolean result =  scanner.next().equalsIgnoreCase("y");
+		controller.identifyPatron(activeWorker, activePatron, result);
+		if (result && verify != null && service.hasHolds(verify.getPatronID())) {
+			System.out.println("Warning! " + verify + " has the following holds: ");
+			for (Hold h : service.getHolds(verify.getPatronID())) {
+				System.out.println(h);
+			}
+		}
 	}
 
 	public void displayCopy(Copy c) {
