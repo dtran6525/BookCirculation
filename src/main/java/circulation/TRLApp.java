@@ -259,8 +259,8 @@ public class TRLApp {
 		}
 	}
 
-	public void displayCopy(Copy c) {
-		System.out.println("Current copy is " + c);
+	public void displayCopy(Copy currentCopy) {
+		System.out.println("Current copy is " + currentCopy);
 	}
 	
 	public boolean verifyCopy() {
