@@ -34,18 +34,6 @@ public class Worker {
 		return "Worker [id=" + id + ", name=" + name + "]";
 	}
 
-	public boolean verifyPatron(Patron patron) {
-		Service service = new Service();
-		if (service.lookupPatron(patron.getPatronID()) == null) {
-			eventLog.addEvent(new Date(), patron + " does not exist");
-			return false;
-		} else if ( service.hasHolds(patron.getPatronID())) {
-			eventLog.addEvent(new Date(), patron + " has " + service.getHolds(patron.getPatronID()));
-			return false;
-		}
-		eventLog.addEvent(new Date(), this + " successfully verified " + patron);
-		return true;
-	}
 	public String getId() {
 		return id;
 	}
