@@ -13,11 +13,6 @@ public class Controller {
 	public String getCopyInfo(Copy copy) {
 		return copy.toString();
 	}
-	
-	public void processCommand(String input) {
-		
-	}
-	
 	public Copy assignCopyToPatron(int input, BookShelf shelf, Patron patron) {
 		Copy c = shelf.getCopies().get(input - 1);
 		patron.grabCopy(c);
@@ -33,17 +28,11 @@ public class Controller {
 	public Worker pickWorker(int input) {
 		return FakeDB.getWorkers().get(input - 1);
 	}
-	public void checkOutPatron(Worker activeWorker, Patron activePatron) {
-		activeWorker.checkOut(activePatron);
-	}
 	public void checkOutCopy(Worker activeWorker, Patron activePatron, Copy copy) {
 		activeWorker.checkOut(activePatron, copy);
 	}
 	public void checkInCopy(Worker activeWorker, Patron activePatron, Copy copy) {
 		activeWorker.checkIn(activePatron, copy);
-	}
-	public List<Copy> checkInPatron(Worker activeWorker, Patron activePatron) {
-		return activeWorker.checkIn(activePatron);
 	}
 	public void identifyPatron(Worker activeWorker, Patron activePatron, boolean result) {
 		activeWorker.identifyPatron(activePatron, result);

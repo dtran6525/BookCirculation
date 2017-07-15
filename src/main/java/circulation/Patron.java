@@ -49,7 +49,7 @@ public class Patron
 		return copiesOut;
 	}
 
-	public void setCopiesOut(ArrayList<Copy> copiesOut) {
+	public void setCopiesOut(List<Copy> copiesOut) {
 		this.copiesOut = copiesOut;
 	}
 	
@@ -122,38 +122,6 @@ public class Patron
 	@Override
 	public String toString() {
 		return "Patron [name=" + name + ", patronID=" + patronID + "]";
-	}
-
-	public static void main(String[] args)
-	{
-		Patron p1 = FakeDB.getPatron("P1");
-		Copy c1 = FakeDB.getCopy("C1");
-		Copy c2 = FakeDB.getCopy("C2");
-		System.out.println("Before checking out first copy");
-		System.out.println(p1);
-		System.out.println();
-		
-		
-		System.out.println("After checking out first copy");
-		p1.checkCopyOut(c1);
-		System.out.println(p1);
-		System.out.println();
-		
-		System.out.println("After checking out second copy");
-		p1.checkCopyOut(c2);
-		System.out.println(p1);
-		System.out.println();
-		
-		System.out.println("After checking in first copy");
-		p1.checkCopyIn(c1);
-		System.out.println(p1);
-		System.out.println();
-		
-		System.out.println("After checking in second copy");
-		p1.checkCopyIn(c2);
-		System.out.println(p1);
-		System.out.println();
-		
 	}
 
 }

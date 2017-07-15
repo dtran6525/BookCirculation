@@ -1,6 +1,8 @@
 package  main.java.circulation;
 import java.util.Date;
 
+import org.junit.Ignore;
+
 public class Copy
 {
 	private String copyID;
@@ -8,6 +10,7 @@ public class Copy
 	
 	private Patron outTo;
 	private Date dueDate;
+	
 	
 	public Date getDueDate() {
 		return dueDate;
@@ -18,6 +21,7 @@ public class Copy
 	public String getCopyID() {
 		return copyID;
 	}
+	
 	public void setCopyID(String copyID) {
 		this.copyID = copyID;
 	}
@@ -72,8 +76,4 @@ public class Copy
 		return true;
 	}
 	
-	public static void main(String[] args)
-	{
-	
-	}
 }
