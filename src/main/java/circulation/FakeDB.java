@@ -35,6 +35,9 @@ public class FakeDB
 		Textbook b1 = new Textbook("b1", "Programming in Java");
 		Textbook b2 = new Textbook("b2", "Programming in Python");
 		Textbook b3 = new Textbook("b3", "Programming in Scala");
+		Textbook b4 = new Textbook("b4", "Programming in Cobol");
+		Textbook b5 = new Textbook("b5", "Programming in C++");
+		Textbook b6 = new Textbook("b6", "Programming in C#");
 		
 		Copy c1 = new Copy("c1", b1);
 		Copy c2 = new Copy("c2", b2);
@@ -42,6 +45,9 @@ public class FakeDB
 		Copy c4 = new Copy("c4", b1);
 		Copy c5 = new Copy("c5", b2);
 		Copy c6 = new Copy("c6", b3);
+		Copy c7 = new Copy("c7", b4);
+		Copy c8 = new Copy("c8", b5);
+		Copy c9 = new Copy("c9", b6);
 		
 		copyStore.put("c1", c1);
 		copyStore.put("c2", c2);
@@ -49,6 +55,9 @@ public class FakeDB
 		copyStore.put("c4", c4);
 		copyStore.put("c5", c5);
 		copyStore.put("c6", c6);
+		copyStore.put("c7", c7);
+		copyStore.put("c8", c8);
+		copyStore.put("c9", c9);
 		
 		List<Hold> holds1 = new ArrayList<>();
 		
